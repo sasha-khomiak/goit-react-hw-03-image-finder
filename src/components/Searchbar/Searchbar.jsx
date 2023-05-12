@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import { Button } from './Searchbar.styled';
+import { Form, Button, Input } from './Searchbar.styled';
 
 class Searchbar extends Component {
   //   static propTypes = { second: third };
@@ -30,12 +30,12 @@ class Searchbar extends Component {
   render() {
     return (
       <header className="searchbar">
-        <form className="form" onSubmit={this.onSubmitForm}>
+        <Form className="form" onSubmit={this.onSubmitForm}>
           <Button type="submit" className="button">
             <span className="button-label">Search</span>
           </Button>
 
-          <input
+          <Input
             className="input"
             type="text"
             autoComplete="off"
@@ -44,7 +44,7 @@ class Searchbar extends Component {
             value={this.state.query}
             onChange={this.handleChangeInput}
           />
-        </form>
+        </Form>
       </header>
     );
   }

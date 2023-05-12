@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const Form = styled.form`
+  display: flex;
+`;
+
 export const Button = styled.button`
   background-color: #f7ac3b;
   border-radius: 5px;
@@ -14,11 +18,25 @@ export const Button = styled.button`
   font-size: 16px;
   line-height: 15px;
 
-  /* cursor: pointer; */
+  cursor: pointer;
 
   color: #ffffff;
 
-  /* &:hover {
-    background-color: #5b3905;
-  } */
+  &:hover {
+    background-color: #d68d1f;
+  }
+`;
+
+export const Input = styled.input`
+  /* white */
+
+  background: #ffffff;
+  border-radius: 5px;
+  border: none;
+
+  width: 715px;
+  height: 50px;
+  padding: 10px;
+
+  margin-left: 20px;
 `;
