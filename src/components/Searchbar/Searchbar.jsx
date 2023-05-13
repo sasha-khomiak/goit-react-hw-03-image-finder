@@ -1,11 +1,14 @@
-// import PropTypes from 'prop-types';
+// підключення бібліотек
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+// стилі компоненту Searchbar
 import { Form, Button, Input } from './Searchbar.styled';
 
+// наш класовий компонент. В пропсах отримує метод onSubmit=>onSubmitSearchBtn, який буде
+// перезаписувати загальний стейт слово для пошуку
 class Searchbar extends Component {
-  //   static propTypes = { second: third };
-
+  // наш локальний стейт для контролю інпута
   state = {
     query: '',
   };
@@ -15,10 +18,16 @@ class Searchbar extends Component {
     this.setState({ query: event.currentTarget.value });
   };
 
+  // при сабміті форми перевіряєм чи не порожній рядок в стейт
+  // і відправляємо запит у загальний стейт в Арр і очищаємо форму
   onSubmitForm = event => {
     event.preventDefault();
+    if (this.state.query.trim() === '') {
+      this.clearForm();
+      return;
+    }
+    this.props.onSubmit(this.state.query.trim());
     this.clearForm();
-    this.props.onSubmit(this.state.query);
   };
 
   // очистка форми
@@ -29,14 +38,13 @@ class Searchbar extends Component {
   // рендеринг форми
   render() {
     return (
-      <header className="searchbar">
-        <Form className="form" onSubmit={this.onSubmitForm}>
-          <Button type="submit" className="button">
-            <span className="button-label">Search</span>
+      <header>
+        <Form onSubmit={this.onSubmitForm}>
+          <Button type="submit">
+            <span>Search</span>
           </Button>
 
           <Input
-            className="input"
             type="text"
             autoComplete="off"
             autoFocus
@@ -52,4 +60,7 @@ class Searchbar extends Component {
 
 export default Searchbar;
 
-// Searchbar.propTypes = {};
+// перевірка propTypes
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

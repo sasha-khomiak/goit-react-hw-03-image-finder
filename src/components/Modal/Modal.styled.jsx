@@ -20,8 +20,9 @@ export const ModalContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 90%;
-  height: 90%;
+  /* width: 90%; */
+  /* height: 90%; */
+  /* padding: 40px; */
 `;
 
 export const Img = styled.img`

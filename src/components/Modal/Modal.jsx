@@ -2,7 +2,7 @@
 // import PropTypes from 'prop-types'
 import React, { Component } from 'react';
 
-// стилізація компонентів
+// стилізація компонентів модалки
 import { Overlay, ModalContainer, Img } from './Modal.styled';
 
 // підключаємо ф-ію роботи з порталами в реакт домі
@@ -27,7 +27,7 @@ export default class Modal extends Component {
     window.removeEventListener('keydown', this.hanleKeyDown);
   }
 
-  // обробник слухача якщо натиснута кнопка Escape - демонтуємо модалку, перемикаємо тогл
+  // обробник слухача якщо натиснута кнопка Escape - демонтуємо модалку, тобто перемикаємо тогл
   hanleKeyDown = event => {
     const { togleModal } = this.props;
     if (event.code === 'Escape') {
@@ -35,7 +35,7 @@ export default class Modal extends Component {
     togleModal();
   };
 
-  // Якшо клік події відбувся по Overlay то закриваємо модалку
+  // Якшо клік події відбувся по Overlay (збіглися target і currentTarget) то закриваємо модалку
   handleOverlayClick = event => {
     const { togleModal } = this.props;
     const { currentTarget, target } = event;
@@ -59,3 +59,10 @@ export default class Modal extends Component {
     );
   }
 }
+
+// перевірка PropTypes
+// Modal.propTypes = {
+//   imageLink: PropTypes.string.isRequired,
+//   setImageLink: PropTypes.func.isRequired,
+//   togleModal: PropTypes.func.isRequired,
+// };
