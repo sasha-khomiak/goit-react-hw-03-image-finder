@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 import { Ul } from './ImageGallery.styled';
-import getImagesList from '../../utils/get-images-request';
+// import getImagesList from '../../utils/get-images-request';
 import ImageGalleryItem from '../ImageGalleryItem';
 
 export default class ImageGallery extends Component {
@@ -40,7 +40,12 @@ export default class ImageGallery extends Component {
     return (
       <Ul className="gallery">
         {arr.map(image => (
-          <ImageGalleryItem image={image} key={image.id} />
+          <ImageGalleryItem
+            image={image}
+            key={image.id}
+            togleModal={this.props.togleModal}
+            setImageLink={this.props.setImageLink}
+          />
         ))}
       </Ul>
     );
