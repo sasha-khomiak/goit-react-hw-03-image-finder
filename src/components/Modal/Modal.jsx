@@ -1,5 +1,5 @@
 // підключення бібліотек
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // стилізація компонентів модалки
@@ -61,8 +61,7 @@ export default class Modal extends Component {
 }
 
 // перевірка PropTypes
-// Modal.propTypes = {
-//   imageLink: PropTypes.string.isRequired,
-//   setImageLink: PropTypes.func.isRequired,
-//   togleModal: PropTypes.func.isRequired,
-// };
+Modal.propTypes = {
+  imageLink: PropTypes.string.isRequired,
+  togleModal: PropTypes.func.isRequired,
+};
