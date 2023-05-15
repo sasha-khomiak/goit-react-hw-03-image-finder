@@ -51,7 +51,7 @@ export class App extends Component {
   };
 
   // при натиску кнопки loadMore
-  // ми жовантажуємо в стейт ше картинки за запитом і збідьшеним на 1 номером сторінки
+  // ми довантажуємо в стейт ше картинки за запитом і збідьшеним на 1 номером сторінки
   // в стейт перезаписуємо сторінку + 1
   loadMorePictures = () => {
     this.getFromAPI(this.state.query, this.state.page + 1);
@@ -81,7 +81,7 @@ export class App extends Component {
       // якщо немає жодного збігу, то виводимо про це повідомлення
       // і скидаємо стейт, query, щоб не засмічувався
       if (response.data.totalHits < 1) {
-        toast('результатів нема!');
+        toast(`За запитом "${this.state.query}" результатів нема!`);
         this.setState({ query: '', page: 1, showBtnLoadMore: false });
       }
       //
@@ -101,18 +101,20 @@ export class App extends Component {
         if (alreadyDownloaded < response.data.totalHits) {
           if (this.state.page === 1) {
             toast(
-              `Знайдено картинок: ${response.data.totalHits}. Натисни "завантажити ще", щоб отримати ще 12 картинок!`
+              `За запитом "${this.state.query}" знайдено картинок: ${response.data.totalHits}. Натисни "завантажити ще", щоб отримати ще 12 картинок!`
             );
           } else {
             const moreImages = response.data.totalHits - alreadyDownloaded;
             toast(
-              `Лишилося ще картинок: ${moreImages} із ${response.data.totalHits}. Натисни "завантажити ще", щоб отримати ще 12 картинок!`
+              `За запитом "${this.state.query}" лишилося ще картинок: ${moreImages} із ${response.data.totalHits}. Натисни "завантажити ще", щоб отримати ще 12 картинок!`
             );
           }
 
           this.setState({ showBtnLoadMore: true });
         } else {
-          toast('Це всі результати. Більше за цим запитом результатів нема!');
+          toast(
+            `Це всі результати за запитом "${this.state.query}". Більше результатів нема!`
+          );
           this.setState({ showBtnLoadMore: false });
         }
       }
