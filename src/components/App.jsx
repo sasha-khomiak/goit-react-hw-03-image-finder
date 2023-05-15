@@ -7,10 +7,14 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// підключаємо бібліотеку Loader
+
 // підключення компонентів
 import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
 import Modal from './Modal';
+import Loader from './Loader/Loader';
+import Button from './Button';
 
 // стилізація App
 import { AppWrap } from './App.styled';
@@ -30,6 +34,7 @@ export class App extends Component {
     imageLink: '',
     page: 1,
     showBtnLoadMore: false,
+    isLoading: false,
   };
 
   //  поки не розумію, що сюжи питсати
@@ -76,7 +81,7 @@ export class App extends Component {
       // і скидаємо стейт, query, щоб не засмічувався
       if (response.data.totalHits < 1) {
         toast('результатів нема!');
-        this.setState({ query: '' });
+        this.setState({ query: '', page: 1, showBtnLoadMore: false });
       }
       //
       //Якщо у нас є результати для показу, то треба
@@ -93,7 +98,17 @@ export class App extends Component {
         // на сервері лишаються ще картинки, якщо ця цифра менше за response.data.totalHits
         const alreadyDownloaded = 12 * this.state.page;
         if (alreadyDownloaded < response.data.totalHits) {
-          toast('Натисни "завантажити ще", щоб отримати більше результатів!');
+          if (this.state.page === 1) {
+            toast(
+              `Знайдено картинок: ${response.data.totalHits}. Натисни "завантажити ще", щоб отримати ще 12 картинок!`
+            );
+          } else {
+            const moreImages = response.data.totalHits - alreadyDownloaded;
+            toast(
+              `Лишилося ще картинок: ${moreImages} із ${response.data.totalHits}. Натисни "завантажити ще", щоб отримати ще 12 картинок!`
+            );
+          }
+
           this.setState({ showBtnLoadMore: true });
         } else {
           toast('Це всі результати. Більше за цим запитом результатів нема!');
@@ -122,7 +137,8 @@ export class App extends Component {
   render() {
     return (
       <AppWrap>
-        <ToastContainer autoClose={2000} />
+        {this.state.isLoading && <Loader />}
+        <ToastContainer autoClose={3000} />
         <Searchbar onSubmit={this.onSubmitSearchBtn} />
         {this.state.query && (
           <ImageGallery
@@ -132,7 +148,7 @@ export class App extends Component {
           />
         )}
         {this.state.showBtnLoadMore && (
-          <button onClick={this.loadMorePictures}>Load more</button>
+          <Button loadMorePictures={this.loadMorePictures} />
         )}
         {this.state.showModal && (
           <Modal

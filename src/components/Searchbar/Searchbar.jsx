@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 // стилі компоненту Searchbar
-import { Form, Button, Input } from './Searchbar.styled';
+import { Header, Form, Button, Input } from './Searchbar.styled';
 
 // наш класовий компонент. В пропсах отримує метод onSubmit=>onSubmitSearchBtn, який буде
 // перезаписувати загальний стейт слово для пошуку
@@ -38,7 +38,7 @@ class Searchbar extends Component {
   // рендеринг форми
   render() {
     return (
-      <header>
+      <Header>
         <Form onSubmit={this.onSubmitForm}>
           <Button type="submit">
             <span>Search</span>
@@ -53,7 +53,7 @@ class Searchbar extends Component {
             onChange={this.handleChangeInput}
           />
         </Form>
-      </header>
+      </Header>
     );
   }
 }
