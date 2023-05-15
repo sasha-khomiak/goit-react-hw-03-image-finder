@@ -37,13 +37,17 @@ export class App extends Component {
   componentDidUpdate(prevProps, prevState) {}
 
   // що робити з отриманими даними при натиску кнопки у формі
+  // викликати ф-ію, яка змінить imagesArray  а потім
   // записати значення тут в state App в поле query
-  // викликати ф-ію, яка змінить imagesArray
+  // скинути сторінку і скинути значення картинок які вже є в стейт
   onSubmitSearchBtn = toFind => {
     this.setState({ query: toFind, imagesArray: [], page: 1 });
     this.getFromAPI(toFind, 1);
   };
 
+  // при натиску кнопки loadMore
+  // ми жовантажуємо в стейт ше картинки за запитом і збідьшеним на 1 номером сторінки
+  // в стейт перезаписуємо сторінку + 1
   loadMorePictures = () => {
     this.getFromAPI(this.state.query, this.state.page + 1);
     this.setState(prevState => ({ page: prevState.page + 1 }));
@@ -58,7 +62,7 @@ export class App extends Component {
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
-      per_page: 4,
+      per_page: 12,
     });
 
     const URL = `${BASE_URL}?key=${API_KEY}&q=${toFind}&page=${page}&${searchParams}`;
@@ -77,11 +81,6 @@ export class App extends Component {
       //
       //Якщо у нас є результати для показу, то треба
       // записати (розпилити) в стейт imagesArray отриманий масив
-      //
-      // якщо це перша сторінка, але є ще результати, то треба
-      // записати (розрилити) в стейт imagesArray отриманий масив
-      // і дізнатися чи є ще в базі картинки для показу, якщо так,
-      // то збільшити на 1 сторінку і показати кнопку  завантажити ще
       else if (response.data.hits.length !== 0) {
         this.setState(prevState => ({
           imagesArray: [...prevState.imagesArray, ...response.data.hits],
@@ -92,7 +91,7 @@ export class App extends Component {
         // для цього кількість результатів у одному запиті множимо на поточний номер сторінки
         // і отримуємо кількість уже отриманих на компі картинок
         // на сервері лишаються ще картинки, якщо ця цифра менше за response.data.totalHits
-        const alreadyDownloaded = 4 * this.state.page;
+        const alreadyDownloaded = 12 * this.state.page;
         if (alreadyDownloaded < response.data.totalHits) {
           toast('Натисни "завантажити ще", щоб отримати більше результатів!');
           this.setState({ showBtnLoadMore: true });
@@ -107,24 +106,6 @@ export class App extends Component {
       this.setState({ error });
     }
   }
-
-  // async apiRequest(q, page) {
-  //   const key = '34781743-09d11a08c8aa729d147b2c9f6';
-  //   const URL = 'https://pixabay.com/api/';
-  //   const response = await axios.get(
-  //     `${URL}?key=${key}&q=${q}&image_type=photo&orientation=horizontal&safesearch=true&per_page=12&page=${page}`
-  //   );
-
-  //   console.log(response.data);
-  //   return response.data;
-  // }
-
-  // // функція, яка за запитом і номером сторінки
-  // async getImagesFromApi(toFind, page) {
-  //   let result = await apiRequest(toFind, 1);
-  //   return result;
-  //   // console.log('result', result);
-  // }
 
   // перемикання модалки показ чи ні, вміст модалки передаємо пропсом зі стейт
   togleModal = () => {
