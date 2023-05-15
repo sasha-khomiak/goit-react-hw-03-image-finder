@@ -12,9 +12,9 @@ const Loader = () => {
   return createPortal(
     <LoaderContainer>
       <Rings
-        height="80"
-        width="80"
-        color="#4fa94d"
+        height="160"
+        width="160"
+        color="#f7ac3b"
         radius="6"
         wrapperStyle={{}}
         wrapperClass=""

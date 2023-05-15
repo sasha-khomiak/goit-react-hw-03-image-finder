@@ -73,9 +73,10 @@ export class App extends Component {
     const URL = `${BASE_URL}?key=${API_KEY}&q=${toFind}&page=${page}&${searchParams}`;
 
     try {
+      this.setState({ isLoading: true });
       const response = await axios.get(URL);
-      console.log('response', response);
-      console.log('response.data.total', response.data.total);
+      // console.log('response', response);
+      // console.log('response.data.total', response.data.total);
       //
       // якщо немає жодного збігу, то виводимо про це повідомлення
       // і скидаємо стейт, query, щоб не засмічувався
@@ -116,6 +117,9 @@ export class App extends Component {
         }
       }
 
+      this.setState({
+        isLoading: false,
+      });
       //
     } catch (error) {
       this.setState({ error });
