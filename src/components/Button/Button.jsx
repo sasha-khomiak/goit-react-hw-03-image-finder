@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { StyledButton } from './Button.styled';
 
 const Button = ({ loadMorePictures }) => {
@@ -9,3 +11,8 @@ const Button = ({ loadMorePictures }) => {
 };
 
 export default Button;
+
+// перевірка PropTypes
+Button.propTypes = {
+  loadMorePictures: PropTypes.func.isRequired,
+};
