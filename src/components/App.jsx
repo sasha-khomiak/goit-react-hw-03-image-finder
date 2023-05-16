@@ -7,8 +7,6 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// підключаємо бібліотеку Loader
-
 // підключення компонентів
 import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
@@ -25,7 +23,7 @@ export class App extends Component {
   //наш стейт в який закидаємо комбінацію пошуку з форми
   // imagesArray - масив для рендерингу
   // query - пошуковий запит після сабміту
-  // showModal - чи показуємо форму
+  // showModal - чи показуємо модалку
   // imageLink - лінк фотографії в модалці
   // page - номер сторінки, за замовчанням 1
   // showBtnLoadMore - чи показувати кнопку завантажити ще

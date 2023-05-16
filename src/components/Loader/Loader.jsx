@@ -1,3 +1,4 @@
+// підключаємо бібліотеку Loader
 import { Rings } from 'react-loader-spinner';
 
 // підключаємо ф-ію роботи з порталами в реакт домі
