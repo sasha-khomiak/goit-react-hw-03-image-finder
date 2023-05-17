@@ -153,8 +153,8 @@ export class App extends Component {
   // ToastContainer - куди виводяться повідомлення
   // Searchbar - форма для пошуку
   //ImageGallery - рендеримо тільки якщо в стейт є query
-  //Button  - рендеримо тільки якщо в стейт showBtnLoadMore - tue
-  //Modal - рендеримо тільки якщо в стейт showModal - tue
+  //Button  - рендеримо тільки якщо в стейт showBtnLoadMore - true
+  //Modal - рендеримо тільки якщо в стейт showModal - true
   // модалка бере картинку зі стейт imageLink
   render() {
     return (

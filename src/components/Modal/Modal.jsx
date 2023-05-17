@@ -13,8 +13,6 @@ const modalRoot = document.querySelector('#modal-root');
 
 // компонент нашої модалки
 export default class Modal extends Component {
-  //   static propTypes = {second: third}
-
   // коли монтується модалка, чіпляємо слухача на натискання кнопок із обробником hanleKeyDown
   componentDidMount() {
     // console.log('монтуємо модалку');
